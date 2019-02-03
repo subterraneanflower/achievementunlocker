@@ -278,7 +278,7 @@ if(location.search && storageIsAvailable) {
     }).then((response) => {
       if(response.ok) {
         alert('投稿に成功しました！');
-        saveJson(userInputSessionStoreKey, {}, false);
+        saveJson(userInputSessionStoreKey, {}, true);
         location.reload();
       } else {
         throw { status: response.status };
