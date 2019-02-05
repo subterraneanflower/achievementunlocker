@@ -137,7 +137,7 @@ function renderPreview(input) {
 if(location.search && storageIsAvailable) {
   const params = new URLSearchParams(location.search);
   const requestTokenSecret = loadJson(requestTokenStorageKey, true).oauth_token_secret;
-  saveJson(requestTokenSecret, {}, true); // delete session data
+  sessionStorage.removeItem(requestTokenStorageKey); // delete session data
 
   // 必要なパラメータがあるときだけアクセストークン取得
   if(params.has('oauth_token') && params.has('oauth_verifier')) {
@@ -150,7 +150,7 @@ if(location.search && storageIsAvailable) {
     requestTwitterToken('https://api.twitter.com/oauth/access_token', data, token)
       .then((tokenMap) => {
         const accessTokens = { oauth_token: tokenMap.oauth_token, oauth_token_secret: tokenMap.oauth_token_secret };
-        saveJson(accessTokenStorageKey, accessTokens);
+        saveJson(accessTokenStorageKey, accessTokens, true);
         location.href = location.origin + location.pathname; // reload
       }).catch((e) => {
         console.error(e);

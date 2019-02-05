@@ -40,13 +40,20 @@ function loadJson(key, isSession = false) {
   return JSON.parse(loadString(key, isSession) || '{}');
 }
 
+// 古いトークン情報を削除
+function deleteLegacyParsistentAuthTokens() {
+  localStorage.removeItem(accessTokenStorageKey);
+}
+
 // 現在の認証情報を取得する
 function getCurrentAuthInfo() {
   if(!storageIsAvailable) {
     return { signedIn: false };
   }
 
-  const accessToken = loadJson(accessTokenStorageKey);
+  deleteLegacyParsistentAuthTokens();
+
+  const accessToken = loadJson(accessTokenStorageKey, true);
   const hasToken = !!accessToken.oauth_token;
   const hasTokenSecret = !!accessToken.oauth_token_secret;
 
