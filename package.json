@@ -17,8 +17,8 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-svgmin": "^2.1.0",
     "gulp-uglify-es": "^1.0.4",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
-    "webpack-stream": "^5.2.1"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-stream": "^7.0.0"
   }
 }
